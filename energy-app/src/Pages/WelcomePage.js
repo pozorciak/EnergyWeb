@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '../Components/Header';
-import Footer from '../Components/Footer';
 import { Box, Container, Grid2, Card, CardContent, CardMedia, Typography, Button, CardActions } from '@mui/material';
 import '../App.css';  // CSS štýly
 

@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Avatar from '@mui/material/Avatar';
-
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Box, Drawer, IconButton, List, ListItem, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';

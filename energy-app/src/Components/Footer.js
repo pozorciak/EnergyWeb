@@ -1,8 +1,6 @@
 import React from 'react';
 import { Box, Typography, Link } from '@mui/material';
 import { styled } from '@mui/system';
-import PhoneIcon from '@mui/icons-material/Phone';  // Ikona telefónu
-import EmailIcon from '@mui/icons-material/Email';  // Ikona emailu
 import logo from '../Images/logo-biele.png'; // Použi správnu cestu k tvojmu logu
 
 const FooterContainer = styled(Box)({
