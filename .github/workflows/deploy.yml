@@ -32,15 +32,16 @@ jobs:
         working-directory: ./energy-app
 
       # === DEPLOY FRONTEND ===
-      # Deploy the frontend build folder to FTP server
+      # Deploy the frontend build folder to SFTP server
       - name: Deploy frontend to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./energy-app/build/  # Uistime sa, že cesta končí lomkou
-          server-dir: /solvingenergy.online/ # Aj serverová cesta má končiť lomkou
+          local-dir: ./energy-app/build/
+          server-dir: /solvingenergy.online/
+          protocol: 'sftp'  # Pridávame tento parameter na použitie SFTP
 
       # === BACKEND SETUP ===
       # Set up Node.js environment for backend
@@ -52,15 +53,16 @@ jobs:
       # Install dependencies for backend
       - name: Install dependencies for backend
         run: npm install
-        working-directory: ./backend # backend sa nachádza v priečinku backend
+        working-directory: ./backend
 
       # === DEPLOY BACKEND ===
-      # Deploy backend files to FTP server
+      # Deploy backend files to SFTP server
       - name: Deploy backend to FTP
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./backend/  # Uistime sa, že cesta končí lomkou
-          server-dir: /api/       # Cesta pre backend tiež končí lomkou
+          local-dir: ./backend/
+          server-dir: /api/
+          protocol: 'sftp'  # Pridávame tento parameter na použitie SFTP
