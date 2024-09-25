@@ -36,8 +36,8 @@ jobs:
       - name: Deploy frontend to SFTP
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}  # Používame kľúč pre SFTP prístup
-          ARGS: "-rltgoDvze"
+          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
+          ARGS: "-rltgoDzv"  # Opravené parametre, odstránený preklep
           SOURCE: "./energy-app/build/"
           REMOTE_HOST: ${{ secrets.FTP_SERVER }}
           REMOTE_USER: ${{ secrets.FTP_USERNAME }}
@@ -61,7 +61,7 @@ jobs:
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
-          ARGS: "-rltgoDvze"
+          ARGS: "-rltgoDzv"  # Opravené parametre
           SOURCE: "./backend/"
           REMOTE_HOST: ${{ secrets.FTP_SERVER }}
           REMOTE_USER: ${{ secrets.FTP_USERNAME }}
