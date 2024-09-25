@@ -14,7 +14,7 @@ function Header() {
         setMobileOpen(!mobileOpen);
     };
 
-    const menuItems = ['MALÁ ENERGETIKA', 'VEĽKÁ ENERGRTIKA', 'KONTAKT'];
+    // const menuItems = ['MALÁ ENERGETIKA', 'VEĽKÁ ENERGRTIKA', 'KONTAKT'];
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
