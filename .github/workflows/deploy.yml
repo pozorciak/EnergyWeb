@@ -1,4 +1,4 @@
-name: Deploy Frontend and Backend
+name: Deploy Frontend and Backend to SFTP
 
 on:
   push:
@@ -31,17 +31,17 @@ jobs:
         run: npm run build
         working-directory: ./energy-app
 
-      # === DEPLOY FRONTEND (SFTP) ===
-      # Deploy the frontend build folder to SFTP server
+      # === DEPLOY FRONTEND TO SFTP ===
+      # Deploy the frontend build folder to SFTP server using password
       - name: Deploy frontend to SFTP
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
-          ARGS: "-rltgoDzv"  # Opravené parametre, odstránený preklep
-          SOURCE: "./energy-app/build/"
           REMOTE_HOST: ${{ secrets.FTP_SERVER }}
           REMOTE_USER: ${{ secrets.FTP_USERNAME }}
+          PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          SOURCE: "./energy-app/build/"
           TARGET: "/solvingenergy.online/"
+          ARGS: "-rltgoDzv"  # Parametre pre prenos cez rsync
 
       # === BACKEND SETUP ===
       # Set up Node.js environment for backend
@@ -55,14 +55,14 @@ jobs:
         run: npm install
         working-directory: ./backend
 
-      # === DEPLOY BACKEND (SFTP) ===
-      # Deploy backend files to SFTP server
+      # === DEPLOY BACKEND TO SFTP ===
+      # Deploy backend files to SFTP server using password
       - name: Deploy backend to SFTP
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
-          ARGS: "-rltgoDzv"  # Opravené parametre
-          SOURCE: "./backend/"
           REMOTE_HOST: ${{ secrets.FTP_SERVER }}
           REMOTE_USER: ${{ secrets.FTP_USERNAME }}
+          PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          SOURCE: "./backend/"
           TARGET: "/api/"
+          ARGS: "-rltgoDzv"  # Parametre pre prenos cez rsync
