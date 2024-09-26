@@ -34,7 +34,7 @@ jobs:
         uses: easingthemes/ssh-deploy@v2.1.5
         with:
           remote_host: ${{ secrets.SSH_HOST }}  # IP alebo doména servera
-          remote_user: ${{ secrets.SSH_USER }}  # Používateľské meno
+          remote_user: ${{ secrets.SSH_USERNAME }}  # Používateľské meno
           ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}  # SSH kľúč
           source: "./energy-app/build/"
           target: "/solvingenergy.online/"
@@ -57,7 +57,7 @@ jobs:
         uses: easingthemes/ssh-deploy@v2.1.5
         with:
           remote_host: ${{ secrets.SSH_HOST }}  # IP alebo doména servera
-          remote_user: ${{ secrets.SSH_USER }}  # Používateľské meno
+          remote_user: ${{ secrets.SSH_USERNAME }}  # Používateľské meno
           ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}  # SSH kľúč
           source: "./backend/"
           target: "/api/"
