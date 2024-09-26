@@ -1,9 +1,7 @@
-name: Deploy Frontend and Backend to SFTP
+name: Deploy Frontend and Backend using Temporary SSH Access
 
 on:
-  push:
-    branches:
-      - main  # Spustí sa pri pushnutí na vetvu main
+  workflow_dispatch:  # Tento workflow spustíš manuálne, keď budeš pripravený nasadiť.
 
 jobs:
   deploy:
@@ -32,17 +30,17 @@ jobs:
         working-directory: ./energy-app
 
       # === DEPLOY FRONTEND TO SFTP ===
-      # Deploy the frontend build folder to SFTP server using password
-      - name: Deploy frontend to SFTP
+      # Deploy the frontend build folder to SFTP server using SSH credentials
+      - name: Deploy frontend to SSH server
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}  # Ak nepoužívaš SSH kľúč, môžeš odstrániť tento riadok
-          REMOTE_HOST: ${{ secrets.FTP_SERVER }}
-          REMOTE_USER: ${{ secrets.FTP_USERNAME }}
-          PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}  # Tu zadaj aktuálnu hodnotu
+          SSH_PORT: ${{ secrets.SSH_PORT }}  # Tu zadaj aktuálnu hodnotu
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}  # Tu zadaj aktuálnu hodnotu
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}  # Tu zadaj aktuálnu hodnotu (heslo)
           SOURCE: "./energy-app/build/"
           TARGET: "/solvingenergy.online/"
-          ARGS: "-rltgoDzv"  # Parametre pre prenos cez rsync
+          ARGS: "-rltgoDzv"
 
       # === BACKEND SETUP ===
       # Set up Node.js environment for backend
@@ -57,14 +55,14 @@ jobs:
         working-directory: ./backend
 
       # === DEPLOY BACKEND TO SFTP ===
-      # Deploy backend files to SFTP server using password
-      - name: Deploy backend to SFTP
+      # Deploy backend files to SSH server using SSH credentials
+      - name: Deploy backend to SSH server
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}  # Ak nepoužívaš SSH kľúč, môžeš odstrániť tento riadok
-          REMOTE_HOST: ${{ secrets.FTP_SERVER }}
-          REMOTE_USER: ${{ secrets.FTP_USERNAME }}
-          PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}  # Tu zadaj aktuálnu hodnotu
+          SSH_PORT: ${{ secrets.SSH_PORT }}  # Tu zadaj aktuálnu hodnotu
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}  # Tu zadaj aktuálnu hodnotu
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}  # Tu zadaj aktuálnu hodnotu (heslo)
           SOURCE: "./backend/"
           TARGET: "/api/"
-          ARGS: "-rltgoDzv"  # Parametre pre prenos cez rsync
+          ARGS: "-rltgoDzv"
