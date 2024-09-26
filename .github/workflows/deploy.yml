@@ -1,7 +1,7 @@
-name: Deploy Frontend and Backend using Temporary SSH Access
+name: Deploy Frontend and Backend using SSH
 
 on:
-  workflow_dispatch:  # Tento workflow spustíš manuálne, keď budeš pripravený nasadiť.
+  workflow_dispatch:  # Manuálne spustenie workflowu
 
 jobs:
   deploy:
@@ -29,18 +29,16 @@ jobs:
         run: npm run build
         working-directory: ./energy-app
 
-      # === DEPLOY FRONTEND TO SFTP ===
-      # Deploy the frontend build folder to SFTP server using SSH credentials
+      # === DEPLOY FRONTEND TO SSH SERVER ===
       - name: Deploy frontend to SSH server
         uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}  # Tu zadaj aktuálnu hodnotu
-          SSH_PORT: ${{ secrets.SSH_PORT }}  # Tu zadaj aktuálnu hodnotu
-          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}  # Tu zadaj aktuálnu hodnotu
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}  # Tu zadaj aktuálnu hodnotu (heslo)
-          SOURCE: "./energy-app/build/"
-          TARGET: "/solvingenergy.online/"
-          ARGS: "-rltgoDzv"
+        with:
+          remote_host: ${{ secrets.SSH_HOST }}  # IP alebo doména servera
+          remote_user: ${{ secrets.SSH_USER }}  # Používateľské meno
+          ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}  # SSH kľúč
+          source: "./energy-app/build/"
+          target: "/solvingenergy.online/"
+          args: "-rltgoDzv"  # Voliteľné rsync parametre
 
       # === BACKEND SETUP ===
       # Set up Node.js environment for backend
@@ -54,15 +52,13 @@ jobs:
         run: npm install
         working-directory: ./backend
 
-      # === DEPLOY BACKEND TO SFTP ===
-      # Deploy backend files to SSH server using SSH credentials
+      # === DEPLOY BACKEND TO SSH SERVER ===
       - name: Deploy backend to SSH server
         uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}  # Tu zadaj aktuálnu hodnotu
-          SSH_PORT: ${{ secrets.SSH_PORT }}  # Tu zadaj aktuálnu hodnotu
-          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}  # Tu zadaj aktuálnu hodnotu
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}  # Tu zadaj aktuálnu hodnotu (heslo)
-          SOURCE: "./backend/"
-          TARGET: "/api/"
-          ARGS: "-rltgoDzv"
+        with:
+          remote_host: ${{ secrets.SSH_HOST }}  # IP alebo doména servera
+          remote_user: ${{ secrets.SSH_USER }}  # Používateľské meno
+          ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}  # SSH kľúč
+          source: "./backend/"
+          target: "/api/"
+          args: "-rltgoDzv"  # Voliteľné rsync parametre
