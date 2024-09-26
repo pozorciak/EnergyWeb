@@ -39,9 +39,10 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}  # Ak nepoužívaš SSH kľúč, môžeš odstrániť tento riadok
           REMOTE_HOST: ${{ secrets.FTP_SERVER }}
           REMOTE_USER: ${{ secrets.FTP_USERNAME }}
+          PASSWORD: ${{ secrets.FTP_PASSWORD }}
           SOURCE: "./energy-app/build/"
           TARGET: "/solvingenergy.online/"
-          ARGS: "-rltgoDzvO"
+          ARGS: "-rltgoDzv"  # Parametre pre prenos cez rsync
 
       # === BACKEND SETUP ===
       # Set up Node.js environment for backend
@@ -63,6 +64,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}  # Ak nepoužívaš SSH kľúč, môžeš odstrániť tento riadok
           REMOTE_HOST: ${{ secrets.FTP_SERVER }}
           REMOTE_USER: ${{ secrets.FTP_USERNAME }}
+          PASSWORD: ${{ secrets.FTP_PASSWORD }}
           SOURCE: "./backend/"
           TARGET: "/api/"
-          ARGS: "-rltgoDzvO"
+          ARGS: "-rltgoDzv"  # Parametre pre prenos cez rsync
