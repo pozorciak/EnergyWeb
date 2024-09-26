@@ -36,6 +36,7 @@ jobs:
           remote_host: ${{ secrets.SSH_HOST }}  # IP alebo doména servera
           remote_user: ${{ secrets.SSH_USERNAME }}  # Používateľské meno
           ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}  # SSH kľúč
+          password: ${{ secrets.SSH_PASSWORD }}
           source: "./energy-app/build/"
           target: "/solvingenergy.online/"
           args: "-rltgoDzv"  # Voliteľné rsync parametre
@@ -59,6 +60,7 @@ jobs:
           remote_host: ${{ secrets.SSH_HOST }}  # IP alebo doména servera
           remote_user: ${{ secrets.SSH_USERNAME }}  # Používateľské meno
           ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}  # SSH kľúč
+          password: ${{ secrets.SSH_PASSWORD }}
           source: "./backend/"
           target: "/api/"
           args: "-rltgoDzv"  # Voliteľné rsync parametre
