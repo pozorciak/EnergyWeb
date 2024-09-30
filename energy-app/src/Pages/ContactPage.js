@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Container, Typography, TextField, Button, Grid, Paper, Divider } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
+// import ReCAPTCHA from 'react-google-recaptcha';
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -9,14 +10,27 @@ function ContactPage() {
     email: '',
     message: '',
   });
+//   const [captchaValue, setCaptchaValue] = useState(null); // Ukladá stav pre captcha
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+//   const handleCaptchaChange = (value) => {
+    // setCaptchaValue(value); // Aktualizuje hodnotu captcha
+//   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Skontroluj, či je captcha platná
+    // if (!captchaValue) {
+    //   alert('Prosím, overte, že nie ste robot!');
+    //   return;
+    // }
+
+    // Ak je captcha overená, odoslať formulár
     console.log(formData);
   };
 
@@ -28,21 +42,24 @@ function ContactPage() {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        flexGrow: 1,  // Flex-grow umožňuje obsahu sa rozšíriť a centrovať
+        flexGrow: 1,
         mt: 4,
+        mb: 4,
       }}
     >
-      <Typography  variant="h5" align="center" gutterBottom>
+      <Typography variant="h5" align="center" >
         Solving Energy s. r. o.
       </Typography>
 
       {/* Kontaktné údaje */}
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <Grid item>
-          <PhoneIcon color='gray'/>
+          <PhoneIcon color="gray" />
         </Grid>
         <Grid item>
-          <Typography color='gray' variant="body1">+421 000 000 000</Typography>
+          <Typography color="gray" variant="body1">
+            +421 000 000 000
+          </Typography>
         </Grid>
       </Grid>
 
@@ -51,30 +68,30 @@ function ContactPage() {
           <EmailIcon />
         </Grid>
         <Grid item>
-          <Typography color='gray' variant="body1">ahoj@solvingenergy.sk</Typography>
+          <Typography color="gray" variant="body1">
+            ahoj@solvingenergy.sk
+          </Typography>
         </Grid>
       </Grid>
 
-      {/* Divider pred nadpisom "Kontaktujte nás" */}
-      <Divider sx={{ width: '100%', my: 4 }} />  {/* Divider s hornou a dolnou medzerou */}
+      <Divider sx={{ width: '100%', my: 4 }} />
 
-      <Typography  variant="h4" align="center" gutterBottom sx={{ mb: 1 }}>
+      <Typography variant="h4" align="center"  sx={{ mb: 1 }}>
         Kontaktujte nás
       </Typography>
 
-      {/* Formulár v Paper komponente */}
       <Paper
+        align="center"
         elevation={3}
         sx={{
-          mt: 4,
-          p: 4,
+          m: 4,
           width: '100%',
           borderRadius: 2,
           textAlign: 'center',
         }}
       >
         <form onSubmit={handleSubmit}>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} sx={{ p: 4 }}>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
@@ -95,7 +112,7 @@ function ContactPage() {
                 required
               />
             </Grid>
-            <Grid item md={12}>
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 label="Správa"
@@ -107,12 +124,24 @@ function ContactPage() {
                 rows={4}
               />
             </Grid>
+
+            {/* reCAPTCHA komponent */}
+            {/* <Grid item xs={12} align="center">
+              <ReCAPTCHA
+                sitekey="6Lf-OlMqAAAAAA6Zt9AKVYNbagzf7uDoTWuu1Xo9" // Nahraď svojím Google reCAPTCHA site kľúčom
+                onChange={handleCaptchaChange}
+              />
+            </Grid> */}
+
             <Grid item xs={12} align="center">
               <Button
                 variant="contained"
-                color="primary"
                 type="submit"
-                sx={{ backgroundColor: '#222', '&:hover': { backgroundColor: '#333' } }}
+                style={{ borderRadius: 50 }}
+                sx={{
+                  backgroundColor: 'green',
+                  '&:hover': { backgroundColor: '#333' },
+                }}
               >
                 ODOSLAŤ
               </Button>

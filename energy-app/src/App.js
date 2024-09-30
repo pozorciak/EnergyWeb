@@ -14,7 +14,6 @@ function App() {
       <Router>
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Header />
-          {/* Flex-grow znamená, že tento kontajner zaberie zostávajúci priestor */}
             <Routes>
               <Route path="/" element={<WelcomePage />} />
               <Route path="/kontakt" element={<ContactPage />} />

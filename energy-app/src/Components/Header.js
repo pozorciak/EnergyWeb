@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import { Box, Drawer, IconButton, List, ListItem, ListItemText } from '@mui/material';
+import { Box, Drawer, IconButton, List} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../Images/logoEnergy.png'; // Cesta k logu
 import { Link } from 'react-router-dom'; // Import Link z React Router
@@ -23,15 +23,15 @@ function Header() {
                 <img src={logo} alt="Logo" style={{ height: '80px', margin: '16px auto' }} />
             </Link>
             <List>
-                <ListItem button key={'MALÁ ENERGETIKA'}>
-                    <ListItemText primary={'MALÁ ENERGETIKA'} />
-                </ListItem>
-                <ListItem button key={'VEĽKÁ ENERGRTIKA'}>
-                    <ListItemText primary={'VEĽKÁ ENERGRTIKA'} />
-                </ListItem>
-                <ListItem button key={'KONTAKT'}>
-                    <ListItemText primary={'KONTAKT'} />
-                </ListItem>
+                <Button component={Link} to="/mala-energetika" key={'MALÁ ENERGETIKA'} sx={{ color: 'gray', fontSize: '16px', fontWeight: '500', fontFamily: 'Exo 2, sans-serif' }}>
+                    {'MALÁ ENERGETIKA'}
+                </Button>
+                <Button component={Link} to="/velka-energetika" key={'VEĽKÁ ENERGRTIKA'} sx={{ color: 'gray', fontSize: '16px', fontWeight: '500', fontFamily: 'Exo 2, sans-serif' }}>
+                    {'VEĽKÁ ENERGRTIKA'}
+                </Button>
+                <Button component={Link} to="/kontakt" key={'KONTAKT'} sx={{ color: 'gray', fontSize: '16px', fontWeight: '500', fontFamily: 'Exo 2, sans-serif' }}>
+                    {'KONTAKT'}
+                </Button>
             </List>
         </Box>
     );
@@ -40,8 +40,9 @@ function Header() {
         <AppBar position="static" sx={{ backgroundColor: 'white', boxShadow: 'none', borderBottom: '1px solid #ccc' }}>
             <Toolbar sx={{ justifyContent: 'space-between' }}>
                 {/* Logo */}
-                <img src={logo} alt="Logo" style={{ height: '80px' }} />
-
+                <Link to="/">
+                    <img src={logo} alt="Logo" style={{ height: '80px' }} />
+                </Link>
                 {/* Mobilné menu */}
                 <IconButton
                     color="inherit"
@@ -55,7 +56,7 @@ function Header() {
 
                 {/* Desktop navigácia */}
                 <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                    <Button component={Link} to="/mala-energetika" key={'MALÁ ENERGETIKA'} sx={{ color: 'gray', fontSize: '16px', fontWeight: '500', fontFamily: 'Exo 2, sans-serif' }}>
+                    <Button component={Link} to="/mala-energetika"  key={'MALÁ ENERGETIKA'} sx={{ color: 'gray', fontSize: '16px', fontWeight: '500', fontFamily: 'Exo 2, sans-serif' }}>
                         {'MALÁ ENERGETIKA'}
                     </Button>
                     <Button component={Link} to="/velka-energetika" key={'VEĽKÁ ENERGRTIKA'} sx={{ color: 'gray', fontSize: '16px', fontWeight: '500', fontFamily: 'Exo 2, sans-serif' }}>
